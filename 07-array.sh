@@ -4,7 +4,7 @@
 #store multiple values.
 
 #ila oka movie ane variable lo we can put multiple values
-MOVIES=("court" "Subham" "Hi nanna" "Ante sundaraniki")
+MOVIES=("court" ,"Subham" ,"Hi nanna" ,"Ante sundaraniki")
 
 #array lo index starts from 0, court=0, subham=1, hi nanna=3... ala
 
