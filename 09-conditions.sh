@@ -2,6 +2,8 @@
 
 NUMBER=$1
 
+echo " enter the NUMBER : $1 " 
+
 if [ $NUMBER -gt 50000 -lt 80000 ]
 
     echo "you can send only 5000 to your parents"
