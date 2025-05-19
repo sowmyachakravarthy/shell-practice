@@ -2,7 +2,7 @@
 
 NUMBER=$1
 
-echo " enter the NUMBER : $1 " 
+read -p "Enter the NUMBER: " $NUMBER 
 
 if [ $NUMBER -gt 50000 ] && [ $NUMBER -lt 79999 ]
 then
