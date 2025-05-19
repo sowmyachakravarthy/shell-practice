@@ -1,6 +1,5 @@
 #!/bin/bash
 
-NUMBER=$1
 
 read -p "Enter the NUMBER: " $NUMBER 
 
