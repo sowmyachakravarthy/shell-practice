@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-read -p "Enter the NUMBER: " NUMBER 
+read -p "Enter your Salary: " NUMBER 
 
 if [ $NUMBER -gt 50000 ] && [ $NUMBER -lt 79999 ]
 then
