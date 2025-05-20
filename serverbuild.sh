@@ -28,19 +28,29 @@ VALIDATE(){
 dnf list installed TaniumClient
 if [ $? -ne 0 ]
 then
-    echo "MySQL is not installed... going to install it"
+    echo "TaniumClient is not installed... going to install it"
     rpm -ivh TaniumClient-7.4.10.1060-1.rhe9.x86_64.rpm
-    VALIDATE $? "TaniumClient"
+    VALIDATE $? "TaniumClient installation"
+
+    /opt/Tanium/TaniumClient/TaniumClient config set ServerNameList "Ts1.avivagroup.com 10.77.252.4, Ts2.avivagroup.com 10.78.252.4, Tsmodule.avivagroup.com 10.77.253.21"
+    VALIDATE $? "ServerNameList config"
+
+    /opt/Tanium/TaniumClient/TaniumClient config set ServerPort 62211
+    VALIDATE $? "ServerPort config"
+
+    /opt/Tanium/TaniumClient/TaniumClient config set Resolver nslookup
+    VALIDATE $? "Resolver config"
+
 else
     echo -e "Nothing to do TaniumClient... $Y already installed $N"
 fi
 
-dnf list installed CrowdStrike
-if [ $? -ne 0 ]
-then
-    echo "python3 is not installed... going to install it"
-    rpm -ivh falcon-sensor-7.13.0-16604.el9.x86_64.rpm
-    VALIDATE $? "CrowdStrike"
-else
-    echo -e "Nothing to do CrowdStrike... $Y already installed $N"
-fi
+# dnf list installed CrowdStrike
+# if [ $? -ne 0 ]
+# then
+#     echo "python3 is not installed... going to install it"
+#     rpm -ivh falcon-sensor-7.13.0-16604.el9.x86_64.rpm
+#     VALIDATE $? "CrowdStrike"
+# else
+#     echo -e "Nothing to do CrowdStrike... $Y already installed $N"
+# fi
