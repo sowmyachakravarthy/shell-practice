@@ -39,39 +39,39 @@ for package in ${PACKAGES[@]}
     if [ $? -ne 0 ]
     then
         echo "$package is not installed... going to install it" | tee -a $LOG_FILE
-        dnf install $package -y &>>$LOG_FILE
+        echo "pretend install" &>>$LOG_FILE
         VALIDATE $? "$package"
     else
     echo -e "Nothing to do $package... $Y already installed $N" | tee -a $LOG_FILE
     fi
 done    
 
-dnf list installed TaniumClient
-if [ $? -ne 0 ]
-then
-    echo "TaniumClient is not installed... going to install it"
-    echo "pretend install"
-    VALIDATE $? "TaniumClient installation"
-
-    /opt/Tanium/TaniumClient/TaniumClient config set ServerNameList "Ts1.avivagroup.com 10.77.252.4, Ts2.avivagroup.com 10.78.252.4, Tsmodule.avivagroup.com 10.77.253.21"
-    VALIDATE $? "ServerNameList config"
-
-    /opt/Tanium/TaniumClient/TaniumClient config set ServerPort 62211
-    VALIDATE $? "ServerPort config"
-
-    /opt/Tanium/TaniumClient/TaniumClient config set Resolver nslookup
-    VALIDATE $? "Resolver config"
-
-else
-    echo -e "Nothing to do TaniumClient... $Y already installed $N"
-fi
-
-# dnf list installed CrowdStrike
+# dnf list installed TaniumClient
 # if [ $? -ne 0 ]
 # then
-#     echo "python3 is not installed... going to install it"
-#     rpm -ivh falcon-sensor-7.13.0-16604.el9.x86_64.rpm
-#     VALIDATE $? "CrowdStrike"
+#     echo "TaniumClient is not installed... going to install it"
+#     echo "pretend install"
+#     VALIDATE $? "TaniumClient installation"
+
+#     /opt/Tanium/TaniumClient/TaniumClient config set ServerNameList "Ts1.avivagroup.com 10.77.252.4, Ts2.avivagroup.com 10.78.252.4, Tsmodule.avivagroup.com 10.77.253.21"
+#     VALIDATE $? "ServerNameList config"
+
+#     /opt/Tanium/TaniumClient/TaniumClient config set ServerPort 62211
+#     VALIDATE $? "ServerPort config"
+
+#     /opt/Tanium/TaniumClient/TaniumClient config set Resolver nslookup
+#     VALIDATE $? "Resolver config"
+
 # else
-#     echo -e "Nothing to do CrowdStrike... $Y already installed $N"
+#     echo -e "Nothing to do TaniumClient... $Y already installed $N"
 # fi
+
+# # dnf list installed CrowdStrike
+# # if [ $? -ne 0 ]
+# # then
+# #     echo "python3 is not installed... going to install it"
+# #     rpm -ivh falcon-sensor-7.13.0-16604.el9.x86_64.rpm
+# #     VALIDATE $? "CrowdStrike"
+# # else
+# #     echo -e "Nothing to do CrowdStrike... $Y already installed $N"
+# # fi
