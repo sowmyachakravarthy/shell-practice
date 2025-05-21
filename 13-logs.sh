@@ -12,6 +12,8 @@ LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 mkdir $LOGS_FOLDER
 echo "script started executing at: $(date)"
 
+echo "Test line" >>$LOG_FILE
+
 if [ $USERID -ne 0 ]
 then
     echo "ERROR:: Please run this script with root access"
