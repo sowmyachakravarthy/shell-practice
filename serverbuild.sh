@@ -6,6 +6,14 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+LOGS_FOLDER="/var/log/build-logs"
+SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
+PACKAGES=("TaniumClient" "CrowdStrike" "Opsware" "Rapid7")
+
+mkdir -p $LOGS_FOLDER
+echo "script started executing at: $(date)"
+
 if [ $USERID -ne 0 ]
 then
     echo -e "$R ERROR:: Please run this script with root access $N"
@@ -25,11 +33,24 @@ VALIDATE(){
     fi
 }
 
+for package in ${PACKAGES[@]}
+    do
+    dnf list installed $package &>>$LOG_FILE
+    if [ $? -ne 0 ]
+    then
+        echo "$package is not installed... going to install it" | tee -a $LOG_FILE
+        dnf install $package -y &>>$LOG_FILE
+        VALIDATE $? "$package"
+    else
+    echo -e "Nothing to do $package... $Y already installed $N" | tee -a $LOG_FILE
+    fi
+done    
+
 dnf list installed TaniumClient
 if [ $? -ne 0 ]
 then
     echo "TaniumClient is not installed... going to install it"
-    rpm -ivh TaniumClient-7.4.10.1060-1.rhe9.x86_64.rpm
+    echo "pretend install"
     VALIDATE $? "TaniumClient installation"
 
     /opt/Tanium/TaniumClient/TaniumClient config set ServerNameList "Ts1.avivagroup.com 10.77.252.4, Ts2.avivagroup.com 10.78.252.4, Tsmodule.avivagroup.com 10.77.253.21"
