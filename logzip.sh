@@ -21,20 +21,25 @@ fi
 
 
 cp $SOURCE_DIR/messages $DEST_DIR 
+echo "Copying messages"
 
 
 >$SOURCE_DIR/messages 
+echo "nullifying messages in /var/log"
 
 
 cd $DEST_DIR 
+echo "cd to $DEST_DIR"
 
 
 gzip messages 
-
+echo "zipping messages"
 
 mv messages.gz messages.$DATE.gz 
+echo "Renaming zip file"
 
 
 mv messages.$DATE.gz $SOURCE_DIR 
+echo "Moving zip file to $SOURCE_DIR"
 
 
