@@ -22,7 +22,7 @@ FILE_SIZE=$(stat -c%s "$LOG_FILE")
 echo "Current /var/log/messages size: $FILE_SIZE bytes"
 
 # Check if the var usage is greater than or equal to 90
-if [ "$VAR_USAGE" -ge 90 ]; then
+if [ "$VAR_USAGE" -ge 20 ]; then
     echo "/var is above 90% full. Compressing messages file..."
 
     # Compress the messages file to /tmp
