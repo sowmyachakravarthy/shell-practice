@@ -20,21 +20,21 @@ fi
 
 
 
-cp $SOURCE_DIR/messages $DEST_DIR &>>$LOG_FILE
+cp $SOURCE_DIR/messages $DEST_DIR 
 
 
->$SOURCE_DIR/messages &>>$LOG_FILE
+>$SOURCE_DIR/messages 
 
 
-cd $DEST_DIR &>>$LOG_FILE
+cd $DEST_DIR 
 
 
-gzip messages &>>$LOG_FILE
+gzip messages 
 
 
-mv messages.gz messages.$DATE.gz &>>$LOG_FILE
+mv messages.gz messages.$DATE.gz 
 
 
-mv messages.$DATE.gz $SOURCE_DIR &>>$LOG_FILE
+mv messages.$DATE.gz $SOURCE_DIR 
 
 
