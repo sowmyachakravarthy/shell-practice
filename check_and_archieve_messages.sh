@@ -20,7 +20,7 @@ echo "Current /var/log/messages size: $FILE_SIZE bytes"
 
 # Check if the file is not empty
 if [ "$FILE_SIZE" -gt 0 ]; then
-    echo "File is not empty. Compressing and moving..."
+    echo "File is consuming high space. Compressing and moving..."
 
     # Compress the messages file to /tmp
     gzip -c "$LOG_FILE" > "$ARCHIVE_FILE"
