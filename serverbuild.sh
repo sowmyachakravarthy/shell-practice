@@ -10,6 +10,7 @@ LOGS_FOLDER="/var/log/build-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 PACKAGES=("TaniumClient" "CrowdStrike" "Opsware" "Rapid7")
+#INSTALL_METHODS=([TaniumClient]="TaniumClient-7.4.10.1060-1.rhe9.x86_64" [CrowdStrike]="falcon-sensor-7.13.0-16604.el9.x86_64" )
 
 mkdir -p $LOGS_FOLDER
 echo "script started executing at: $(date)"
@@ -26,15 +27,23 @@ fi
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo -e "Installing $2 is ... $G SUCCESS $N"
+        echo -e "Installing $2 is ... $G SUCCSS $N"
     else
         echo -e "Installing $2 is ... $R FAILURE $N"
         exit 1
     fi
 }
 
+
+
 for package in ${PACKAGES[@]}
     do
+    echo "checking package..." | tee -a $LOG_FILE
+
+    if $package = "rpm" then
+    echo "Using rpm to install $package" | tee -a "$LOG_FILE"
+    echo "pretend rpm -ivh $package.rpm" >> "$LOG_FILE"
+
     dnf list installed $package &>>$LOG_FILE
     if [ $? -ne 0 ]
     then

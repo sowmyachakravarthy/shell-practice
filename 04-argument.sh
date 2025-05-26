@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PERSON1=$1
-PERSON2=$2
+PERSON2=$2  
 
 echo " $PERSON1 : i'm still trying how to learn scripting"
 echo " $PERSON2 : don't worry, slowly you will understand"
